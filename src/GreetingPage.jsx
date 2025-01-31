@@ -3,8 +3,9 @@ import { useParams, useNavigate, useSearchParams } from 'react-router-dom'
 import sanitizeHtml from 'sanitize-html'
 import slugify from 'slugify'
 import { getGreetingType } from './utils'
-import { FaCopy } from 'react-icons/fa'
-import { FaSun, FaMoon, FaStar, FaCloudSun, FaHome } from 'react-icons/fa'
+import { FaCopy, FaSun, FaMoon, FaStar, FaCloudSun, FaHome, FaWhatsapp, FaTelegram, FaShareAlt, FaTimes } from "react-icons/fa";
+import ImageCanvas from "./ImageCanvas";
+import Confetti from './Confetti';
 
 export default function GreetingPage() {
   const { slug } = useParams()
@@ -14,6 +15,7 @@ export default function GreetingPage() {
   const [wish, setWish] = useState('')
   const [isValid, setIsValid] = useState(true)
   const [copyStatus, setCopyStatus] = useState({ text: 'Copy Text', url: 'Copy URL' })
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     try {
@@ -70,10 +72,10 @@ export default function GreetingPage() {
       if (type === 'text') {
         const text = decodeURIComponent(searchParams.get('wish') || '').replace(/<br\s*\/?>/gi, '\n')
         await navigator.clipboard.writeText(text)
-        setCopyStatus(prev => ({ ...prev, text: 'Copied!' }))
+        setCopyStatus(prev => ({ ...prev, text: '✅ Copied' }))
       } else {
         await navigator.clipboard.writeText(window.location.href)
-        setCopyStatus(prev => ({ ...prev, url: 'Copied!' }))
+        setCopyStatus(prev => ({ ...prev, url: '✅ Copied' }))
       }
 
       setTimeout(() => {
@@ -103,7 +105,13 @@ export default function GreetingPage() {
     night: 'is-dark'
   }
 
+  const imageURL = "/greeting.png";
+  const overlayText = `Good ${type}, ${name}`;
+  const shareURL = encodeURIComponent(window.location.href);
+  const shareText = encodeURIComponent(`Check out this special greeting for you ${name}`);
+
   return (
+    <>
     <div className={`card mt-5 mb-4 ${colors[type]}`}>
       <div className="card-content">
         <h1 className="title is-4 mb-4 mt-4">
@@ -113,11 +121,13 @@ export default function GreetingPage() {
         <p className="subtitle is-6">
           🕒 Current Time: {currentTime} (IST)
         </p>
-
+        <Confetti />
         {wish && (
           <p className="wish-content has-text-dark" dangerouslySetInnerHTML={{ __html: wish }} />
         )}
-        <hr />
+        <br />
+        <ImageCanvas image={imageURL} text={overlayText} />
+        <br /><hr /><br />
         <div className="field is-grouped">
           <button
             className="button is-warning"
@@ -147,5 +157,30 @@ export default function GreetingPage() {
         </div>
       </div>
     </div>
+    <div className={`floating-share-bar ${isOpen ? "open" : ""}`}>
+        <button className="toggle-button" onClick={() => setIsOpen(!isOpen)}>
+          {isOpen ? <FaTimes size={20} /> : <FaShareAlt size={20} />}
+        </button>
+
+        <div className="share-buttons">
+          <a
+            href={`https://api.whatsapp.com/send?text=${shareText} - ${shareURL}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button is-success is-rounded"
+          >
+            <FaWhatsapp size={22} />
+          </a>
+          <a
+            href={`https://t.me/share/url?url=${shareURL}&text=${shareText}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="button is-info is-rounded"
+          >
+            <FaTelegram size={22} />
+          </a>
+        </div>
+      </div>
+  </>
   )
 }

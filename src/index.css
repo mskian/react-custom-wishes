@@ -117,3 +117,61 @@ p {
   display: block;
   margin-bottom: 0.5rem;
 }
+.canvas-container {
+  width: 100%;
+  max-width: 540px;
+  text-align: center;
+  border: 1px solid #f37c45;
+  padding: 18px;
+}
+canvas {
+  font-family: "Anek Tamil", serif;
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: auto;
+  image-rendering: crisp-edges;
+}
+.floating-share-bar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: 8px;
+  z-index: 1000;
+  transition: all 0.3s ease-in-out;
+}
+.floating-share-bar .toggle-button {
+  background-color: #1e824c;
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out, background-color 0.3s ease;
+}
+.floating-share-bar .toggle-button:hover {
+  background-color: #145a32;
+  transform: scale(1.1);
+}
+.share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
+}
+.floating-share-bar.open .share-buttons {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-10px);
+}
