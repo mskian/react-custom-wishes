@@ -6,7 +6,7 @@ const ImageCanvas = ({ image, text }) => {
   const canvasRef = useRef(null);
   const [context, setContext] = useState(null);
 
-  const font = "700 28pt Anek Tamil";
+  const font = "700 28pt Catamaran";
   const color = "#ffeaa7";
   const textX = 540;
   const textY = 800;

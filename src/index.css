@@ -5,22 +5,25 @@ html, body {
 	margin: 0;
 	padding: 0;
 	overflow-x: hidden;
-	font-family: 'Anek Tamil', sans-serif;
+	font-family: "Catamaran", serif;
 }
 body {
   background: linear-gradient(135deg, #ff7eb3, #ff758c);
   min-height: 100vh;
   justify-content: center;
   align-items: center;
-  font-family: 'Anek Tamil', sans-serif;
+  font-family: "Catamaran", serif;
   font-weight: 600;
+  line-height: 1.618;
+  -webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: grayscale;
 }
 
 .card {
   border-radius: 15px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   background: #fff;
-  font-family: 'Anek Tamil', sans-serif;
+  font-family: "Catamaran", serif;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -49,7 +52,7 @@ body {
 }
 
 .button {
-  font-family: "Anek Tamil", sans-serif;
+  font-family: "Catamaran", serif;
   border: none;
   font-weight: 700;
   transition: background-color 0.3s ease;
@@ -61,15 +64,16 @@ body {
 }
 
 .title, .subtitle {
-  font-family: 'Anek Tamil', sans-serif;
-  color: #ff3860;
+  font-family: "Catamaran", serif;
+  color: #3a2734;
 }
 
 .input {
-  font-family: "Anek Tamil", sans-serif;
+  font-family: "Catamaran", serif;
   border: 2px solid #ff7eb3;
   border-radius: 10px;
   font-size: 1.2rem;
+  font-weight: 600;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -79,20 +83,22 @@ body {
 }
 
 .input::placeholder {
-  font-family: 'Anek Tamil', sans-serif;
+  font-family: "Catamaran", serif;
   color: #ff7eb3;
   opacity: 0.7;
 }
-
+input {
+  font-family: "Catamaran", serif;
+}
 .textarea {
-  font-family: "Anek Tamil", sans-serif;
+  font-family: "Catamaran", serif;
   border: 2px solid #ff7eb3;
   border-radius: 10px;
   font-size: 1.2rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .textarea::placeholder {
-  font-family: 'Anek Tamil', sans-serif;
+  font-family: "Catamaran", serif;
   color: #ff7eb3;
   opacity: 0.7;
 }
@@ -101,23 +107,27 @@ h1 {
   word-break: break-word;
 }
 .wish-content {
-  font-family: 'Anek Tamil', sans-serif;
-  font-size: 18px;
+  font-family: "Catamaran", serif;
+  font-size: 16px;
+  letter-spacing: .03em;
   font-weight: 600;
-  white-space: pre-wrap;
   word-break: break-word;
 }
 p {
-  font-family: 'Anek Tamil', sans-serif;
-  white-space: pre-wrap;
+  font-family: "Catamaran", serif;
+  letter-spacing: .03em;
   word-break: break-word;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-font-smoothing: antialiased !important;
+  text-rendering: optimizelegibility !important;
 }
 .wish-content br {
   content: "";
   display: block;
-  margin-bottom: 0.5rem;
 }
 .canvas-container {
+  font-family: "Catamaran", serif;
   width: 100%;
   max-width: 540px;
   text-align: center;
@@ -125,7 +135,7 @@ p {
   padding: 18px;
 }
 canvas {
-  font-family: "Anek Tamil", serif;
+  font-family: "Catamaran", serif;
   display: block;
   width: 100%;
   height: auto;
@@ -174,4 +184,10 @@ canvas {
   opacity: 1;
   visibility: visible;
   transform: translateY(-10px);
+}
+.date {
+  font-family: "Catamaran", serif;
+  color: #362326;
+  text-transform: uppercase;
+  font-size: 14px;
 }

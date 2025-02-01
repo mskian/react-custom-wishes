@@ -90,10 +90,10 @@ export default function GreetingPage() {
   if (!isValid) return null
 
   const icons = {
-    morning: <FaSun className="icon mr-2" />,
-    afternoon: <FaCloudSun className="icon mr-2" />,
-    evening: <FaStar className="icon mr-2" />,
-    night: <FaMoon className="icon mr-2" />,
+    morning: <FaSun className="icon mr-2 has-text-warning" />,
+    afternoon: <FaCloudSun className="icon mr-2 has-text-danger" />,
+    evening: <FaStar className="icon mr-2 has-text-info" />,
+    night: <FaMoon className="icon mr-2 has-text-primary" />,
   }
 
   const { type, currentTime } = getGreetingType()
@@ -106,6 +106,7 @@ export default function GreetingPage() {
   }
 
   const imageURL = "/greeting.png";
+  const imageTwoURL = "/greeting-tamil.png";
   const overlayText = `Good ${type}, ${name}`;
   const shareURL = encodeURIComponent(window.location.href);
   const shareText = encodeURIComponent(`Check out this special greeting for you ${name}`);
@@ -118,8 +119,8 @@ export default function GreetingPage() {
           {icons[type]} <br /><br />
           Good {type}, {name}
         </h1>
-        <p className="subtitle is-6">
-          🕒 Current Time: {currentTime} (IST)
+        <p className="is-6 mb-3 date">
+          <b>🕒 Current Time: {currentTime}</b>
         </p>
         <Confetti />
         {wish && (
@@ -127,6 +128,8 @@ export default function GreetingPage() {
         )}
         <br />
         <ImageCanvas image={imageURL} text={overlayText} />
+        <br />
+        <ImageCanvas image={imageTwoURL} text={overlayText} />
         <br /><hr /><br />
         <div className="field is-grouped">
           <button

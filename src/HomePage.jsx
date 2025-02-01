@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import slugify from 'slugify'
 import sanitizeHtml from 'sanitize-html'
+import { IoIosCreate } from "react-icons/io";
 
 export default function HomePage() {
   const [name, setName] = useState('')
@@ -50,8 +51,8 @@ export default function HomePage() {
       <div className="card-content">
         <h2 className="title is-4 mb-5 mt-4">Create Your Greeting ✨</h2>
         <form onSubmit={handleSubmit}>
-          <div className="field">
-            <label className="label has-text-dark">Name</label>
+          <div className="field mb-4">
+            <label className="label has-text-dark">Name:</label>
             <div className="control">
               <input
                 className={`input ${errors.name ? 'is-danger' : ''}`}
@@ -66,8 +67,8 @@ export default function HomePage() {
             <p className="help">{name.length}/38</p>
           </div>
 
-          <div className="field">
-            <label className="label has-text-dark">Custom Wish</label>
+          <div className="field mb-5">
+            <label className="label has-text-dark">Custom Wish:</label>
             <div className="control">
               <textarea
                 className={`textarea ${errors.wish ? 'is-danger' : ''}`}
@@ -82,10 +83,10 @@ export default function HomePage() {
             <p className="help">{wish.length}/300</p>
           </div>
 
-          <div className="field">
+          <div className="field mb-4">
             <div className="control">
               <button type="submit" className="button is-warning">
-                Generate Greeting
+               <IoIosCreate size={15} />&nbsp;Generate Greeting
               </button>
             </div>
           </div>
