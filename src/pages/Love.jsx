@@ -2,9 +2,12 @@ import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import sanitizeHtml from 'sanitize-html'
 import slugify from 'slugify'
-import { FaCopy, FaWhatsapp, FaTelegram, FaShareAlt, FaTimes } from "react-icons/fa";
+import { FaHome, FaCopy, FaWhatsapp, FaTelegram, FaShareAlt, FaTimes } from "react-icons/fa";
+import { IoIosCreate } from "react-icons/io";
 import ImageCanvas from "../ImageCanvas";
-import Confetti from '../Confetti';
+import Love from '../components/Love';
+import AudioPlayer from "../components/AudioPlayer";
+
 
 export default function GreetingPage() {
   const { slug } = useParams()
@@ -16,6 +19,14 @@ export default function GreetingPage() {
   const [userInput, setUserInput] = useState('');
   const [inputError, setInputError] = useState('');
   const [showSuccess, setShowSuccess] = useState(false);
+
+  useEffect(() => {
+    if (name) {
+      requestAnimationFrame(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      });
+    }
+  }, [name]);
 
   useEffect(() => {
     try {
@@ -46,7 +57,7 @@ export default function GreetingPage() {
     // eslint-disable-next-line no-unused-vars
     } catch (error) {
       setIsValid(false)
-      navigate('/love/your-name', { replace: true })
+      navigate('/love/partner-name', { replace: true })
     }
   }, [slug, navigate])
 
@@ -83,29 +94,12 @@ export default function GreetingPage() {
     
     const formattedSlug = slugify(userInput.trim(), {
       replacement: '-',
+      remove: /[*+~.()'"!:@]/g,
       lower: true,
       strict: false
     })
     navigate(`/love/${formattedSlug}`)
-    window.location.reload() 
-  }
-
-  const handleCopy = async (type) => {
-    try {
-      const statusKey = type === 'text' ? 'text' : 'url'
-      setCopyStatus(prev => ({ ...prev, [statusKey]: '✅ Copied' }))
-
-      if (type === 'url') {
-        await navigator.clipboard.writeText(window.location.href)
-      }
-
-      setTimeout(() => {
-        setCopyStatus(prev => ({ ...prev, [statusKey]: type === 'text' ? 'Copy Text' : 'Copy URL' }))
-      }, 2000)
-    // eslint-disable-next-line no-unused-vars
-    } catch (error) {
-      setCopyStatus({ text: 'Failed!', url: 'Failed!' })
-    }
+    setName(userInput.trim());
   }
 
   if (!isValid) return null;
@@ -114,6 +108,31 @@ export default function GreetingPage() {
   const overlayText = `${name}`;
   const shareURL = encodeURIComponent(window.location.href);
   const shareText = encodeURIComponent(`A special காதலர் தின வாழ்த்துக்கள் 💖 for you ${name}`);
+  const WishText = `உன் விழிகள் பேசும் காதல் மொழியில் 🎧\nஎன் இதயம் எழுதி வைத்த கவிதை நீ 😍\nஉன் பெயரைச் சொன்னால் கூட 🎤\nஎன் இதயம் இசைபோல் ஒலிக்கிறது 🎵\nஉன் இதயத் தோட்டத்தில் நான் ஒரு நிலா ஒளி 🌹\nகாதலர் தினம் வாழ்த்துக்கள் என் உயிரே 💖✨`;
+   const cleanWish = sanitizeHtml(WishText, { 
+          allowedTags: [], 
+          allowedAttributes: {},
+          transformTags: { br: () => ({ tagName: 'br', attribs: {} }) }
+        }).replace(/\n/g, '<br />')
+
+  const handleCopy = async (type) => {
+          try {
+            if (type === 'text') {
+              await navigator.clipboard.writeText(WishText)
+              setCopyStatus(prev => ({ ...prev, text: '✅ Copied' }))
+            } else {
+              await navigator.clipboard.writeText(window.location.href)
+              setCopyStatus(prev => ({ ...prev, url: '✅ Copied' }))
+            }
+      
+            setTimeout(() => {
+              setCopyStatus({ text: 'Copy Text', url: 'Copy URL' })
+            }, 2000)
+          // eslint-disable-next-line no-unused-vars
+          } catch (error) {
+            setCopyStatus({ text: 'Failed!', url: 'Failed!' })
+          }
+        }
 
   return (
     <>
@@ -124,21 +143,29 @@ export default function GreetingPage() {
               Greeting successfully updated ✨
             </div>
           )}
-          <h1 className="title is-5 mb-4 mt-4">
-            காதலர் தின வாழ்த்துக்கள் 💖 {name}
+          <h1 className="title is-4 mb-4 mt-4">
+            💖 காதலர் தின வாழ்த்துக்கள்<br />
           </h1>
-          <Confetti key={name} />
           <br />
-          <p className="wish-content has-text-dark">
-            உன் விழிகள் பேசும் காதல் மொழியில் என் இதயம் எழுதி வைத்த கவிதை நீ <br />
-            உன் பெயரைச் சொன்னால் கூட என் இதயம் இசைபோல் ஒலிக்கிறது <br />
-            உன் இதயத் தோட்டத்தில் நான் ஒரு நிலா ஒளி 🌙🌹 <br />
-            <b>காதலர் தினம் வாழ்த்துக்கள், என் உயிரே&quot; 💖✨</b>
-          </p>
-          <br /><br />
+          <p className="wish-content has-text-black is-size-5 notification is-info">😍 {name}</p>
+          <AudioPlayer src="https://christmaswish.pages.dev/love.mp3" title="காதல் கவிதை 🎧" />
+          <br />
+          <Love key={name} />
+          {cleanWish && (
+          <p className="wish-content has-text-dark" dangerouslySetInnerHTML={{ __html: cleanWish }} />
+           )}
+          <br />
           <ImageCanvas image={imageURL} text={overlayText} />
           <br /><hr />
           <div className="field is-grouped">
+            <button
+              className="button is-warning"
+              onClick={() => handleCopy('text')}
+              type="button"
+            >
+              <FaCopy />&nbsp;
+              <span>{copyStatus.text}</span>
+            </button>
             <button
               className="button is-info"
               onClick={() => handleCopy('url')}
@@ -180,10 +207,19 @@ export default function GreetingPage() {
                 className="button is-primary"
                 disabled={!!inputError || !userInput.trim()}
               >
-                Generate Greeting
+                <IoIosCreate size={15} />&nbsp; Create
               </button>
             </div>
           </form>
+          <br />
+          <div className="buttons is-centered">
+             <button 
+                className="button is-link"
+                onClick={() => navigate('/love/partner-name')}
+              >
+                <FaHome />
+              </button>
+          </div>
           <br />
         </div>
       </div>
