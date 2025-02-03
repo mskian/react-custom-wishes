@@ -63,7 +63,7 @@ export default function GreetingPage() {
 
   useEffect(() => {
     if (name) {
-      document.title = `${name}'s காதலர் தின வாழ்த்துக்கள் 💖`
+      document.title = `${name} காதலர் தின வாழ்த்துக்கள் 💖`
       document.querySelector('meta[name="description"]').setAttribute(
         'content',
         `A special காதலர் தின வாழ்த்துக்கள் 💖 for you ${name}.`
