@@ -5,6 +5,7 @@ import App from './App'
 import HomePage from './HomePage'
 import GreetingPage from './GreetingPage'
 import ErrorPage from './ErrorPage'
+import Love from "./pages/Love";
 import './index.css'
 
 const router = createBrowserRouter([
@@ -14,7 +15,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       { index: true, element: <HomePage /> },
-      { path: "/wish/:slug", element: <GreetingPage /> }
+      { path: "/wish/:slug", element: <GreetingPage /> },
+      { path: "/love/:slug", element: <Love /> }
     ]
   }
 ])
