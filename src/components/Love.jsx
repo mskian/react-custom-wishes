@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 import confetti from 'canvas-confetti';
-import { FaHeart } from 'react-icons/fa';
+import { FaFire } from 'react-icons/fa';
 
 export default function HeartConfetti() {
   const [isAnimating, setIsAnimating] = useState(false);
@@ -40,16 +40,16 @@ export default function HeartConfetti() {
   return (
     <div>
       <button
-        className="button is-warning is-rounded is-small mt-2 mb-5"
+        className="button is-rounded is-small mt-2 mb-5 shine-button"
         onClick={fireHeartConfetti}
         style={{ transition: 'transform 0.3s ease' }}
         onMouseEnter={e => (e.target.style.transform = 'scale(1.1)')}
         onMouseLeave={e => (e.target.style.transform = 'scale(1)' )}
       >
         <span className="icon">
-          <FaHeart />
+          <FaFire />
         </span>
-        <span>Spread Love</span>
+        <span>Touch It</span>
       </button>
     </div>
   );

@@ -143,13 +143,14 @@ export default function GreetingPage() {
               Greeting successfully updated ✨
             </div>
           )}
-          <h1 className="title is-4 mb-4 mt-4">
-            💖 காதலர் தின வாழ்த்துக்கள்<br />
+          <h1 className="is-size-4 mb-4 mt-4 shining-text">
+              💜 காதலர் தின வாழ்த்துக்கள் 💜
           </h1>
-          <br />
-          <p className="wish-content has-text-black is-size-5 notification is-info">😍 {name}</p>
           <AudioPlayer src="https://christmaswish.pages.dev/love.mp3" title="காதல் கவிதை 🎧" />
           <br />
+          <p className="is-size-5 love-content shining-text">
+              💕 {name}
+          </p>
           <Love key={name} />
           {cleanWish && (
           <p className="wish-content has-text-dark" dangerouslySetInnerHTML={{ __html: cleanWish }} />
@@ -211,6 +212,7 @@ export default function GreetingPage() {
               </button>
             </div>
           </form>
+          <br />
           <br />
           <div className="buttons is-centered">
              <button 

@@ -261,3 +261,44 @@ canvas {
   font-size: 0.8rem;
   color: white;
 }
+
+.shine-button {
+  background: linear-gradient(90deg, #f5d389, #e6cf69, #f7df76);
+  color: #0f1601;
+  font-family: "Catamaran", serif, sans-serif; 
+  font-weight: bold;
+}
+
+.shining-text {
+  font-family: "Catamaran", serif, sans-serif; 
+  font-weight: bold;
+  color: transparent;
+  letter-spacing: 0.03em;
+  font-size: 18px;
+  word-break: break-word;
+  background-image: linear-gradient(90deg, #e95318, #ca51a6, #ad0d58);
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: shine 3s ease-in-out infinite;
+  will-change: background-position;
+}
+
+@keyframes shine {
+  0% {
+    background-position: -200% 0;
+  }
+  50% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+@supports not (--css: variables) {
+  .shining-text {
+    color: #ffcc00;
+    background: none;
+  }
+}
