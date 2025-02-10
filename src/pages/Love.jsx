@@ -4,7 +4,7 @@ import sanitizeHtml from 'sanitize-html'
 import slugify from 'slugify'
 import { FaHome, FaCopy, FaWhatsapp, FaTelegram, FaShareAlt, FaTimes } from "react-icons/fa";
 import { IoIosCreate } from "react-icons/io";
-import ImageCanvas from "../ImageCanvas";
+import ImageCanvas from "../components/Lovecanva";
 import Love from '../components/Love';
 import AudioPlayer from "../components/AudioPlayer";
 
